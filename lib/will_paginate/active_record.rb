@@ -174,7 +174,7 @@ module WillPaginate
         end
 
         rel = rel.extending(RelationMethods)
-        pagenum = ::WillPaginate::PageNumber(num.nil? ? 1 : num)
+        pagenum = ::WillPaginate::PageNumber(num.nil? || num == 0 ? 1 : num)
         per_page = rel.limit_value || self.per_page
         rel = rel.offset(pagenum.to_offset(per_page).to_i)
         rel = rel.limit(per_page) unless rel.limit_value
